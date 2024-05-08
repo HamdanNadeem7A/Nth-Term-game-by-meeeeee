@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nth Term Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nth Term Game</h1>
+    <p>Guess the nth term of the sequence!</p>
+    <div id="question"></div>
+    <input id="answer" type="text" placeholder="Your answer here">
+    <button onclick="generateQuestion()">Next Question</button>
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="result"></p>
+
+    <script>
+        var sequences = [
+            [1, 2, 3, 4, 5], // Arithmetic sequence
+            [1, 4, 9, 16, 25], // Square numbers
+            [1, 1, 2, 3, 5], // Fibonacci sequence
+            [2, 3, 5, 7, 11], // Prime numbers
+            [2, 6, 12, 20, 30] // Your custom sequence
+        ];
+        var sequenceNames = ["an arithmetic sequence", "square numbers", "the Fibonacci sequence", "prime numbers", "your custom sequence"];
+        var currentSequence;
+        var n;
+
+        function generateQuestion() {
+            var sequenceIndex = Math.floor(Math.random() * sequences.length);
+            currentSequence = sequences[sequenceIndex];
+            n = Math.floor(Math.random() * 5) + 1;
+            document.getElementById('question').innerText = "What is the " + n + "th term of " + sequenceNames[sequenceIndex] + "?";
+            document.getElementById('result').innerText = "";
+            document.getElementById('answer').value = "";
+        }
+
+        function checkAnswer() {
+            var userAnswer = document.getElementById('answer').value;
+            if (userAnswer == currentSequence[n - 1]) {
+                document.getElementById('result').innerText = "Correct! The " + n + "th term of the sequence is indeed " + userAnswer + ".";
+            } else {
+                document.getElementById('result').innerText = "Sorry, that's not correct. The " + n + "th term of the sequence is " + currentSequence[n - 1] + ".";
+            }
+        }
+
+        generateQuestion(); // Generate the first question when the page loads
+    </script>
+</body>
+</html>
